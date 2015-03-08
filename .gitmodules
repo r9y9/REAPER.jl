@@ -1,0 +1,3 @@
+[submodule "deps/REAPER"]
+	path = deps/REAPER
+	url = https://github.com/r9y9/REAPER.git
