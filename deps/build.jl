@@ -1,6 +1,6 @@
 # build REAPER as a shared library
 
-if !isdir(joinpath(dirname(@__FILE__), "REAPER"))
+if !isdir(joinpath(dirname(@__FILE__), "REAPER", "build"))
     cd(Pkg.dir("REAPER"))
     run(`git submodule update --init --recursive`)
 end
