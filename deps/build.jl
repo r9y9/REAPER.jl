@@ -11,7 +11,7 @@ build_dir = joinpath(Pkg.dir("REAPER"), "deps", "REAPER", "build")
 cd(build_dir)
 
 run(`cmake ..`)
-run(`make`)
+run(`make reaper_wrap`)
 
 # After runing make, REAPER/build/libreaper.so/dylib will be created
 try
