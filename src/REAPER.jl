@@ -1,6 +1,17 @@
 module REAPER
 
-export reaper
+export
+    # High level interface
+    reaper,
+
+    # Low-level interface
+    EpochTracker,
+    init,
+    compute_features,
+    track_epochs,
+    get_epoch,
+    get_f0_and_corr
+
 
 const libreaper = joinpath(Pkg.dir("REAPER"), "deps", "REAPER", "build", "libreaper")
 
