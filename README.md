@@ -1,6 +1,7 @@
 # REAPER
 
 [![Build Status](https://travis-ci.org/r9y9/REAPER.jl.svg?branch=master)](https://travis-ci.org/r9y9/REAPER.jl)
+[![Coverage Status](https://coveralls.io/repos/r9y9/REAPER.jl/badge.svg)](https://coveralls.io/r/r9y9/REAPER.jl)
 
 A Julia interface for [REAPER](https://github.com/google/REAPER).
 
