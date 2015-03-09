@@ -72,9 +72,7 @@ function init(et::EpochTracker, x::Vector{Int16}, fs,
               minf0::Float64=40.0,
               maxf0::Float64=500.0,
               do_high_pass::Bool=true,
-              do_hilbert_transform::Bool=true,
-              inter_pulse::Float64=0.01,
-              frame_period::Float64=0.005)
+              do_hilbert_transform::Bool=true)
     ccall((:InitEpochTracker, libreaper), Bool,
           (Ptr{Void}, Ptr{Int16}, Int32, Float32, Float32, Float32,
           Bool, Bool), et.ptr, x, length(x), fs, minf0, maxf0,
