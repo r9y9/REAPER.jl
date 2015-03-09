@@ -4,6 +4,8 @@
 
 Playing with [REAPER](https://github.com/google/REAPER) in Julia.
 
+[REAPER demo | nbviewer](http://nbviewer.ipython.org/github/r9y9/REAPER.jl/blob/master/examples/REAPER%20demo.ipynb)
+
 ## Notice
 
 - This is not an official package
