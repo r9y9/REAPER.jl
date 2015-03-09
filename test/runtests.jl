@@ -49,7 +49,7 @@ let
     inter_pulse = 0.01
     frame_period = 0.005
 
-    pm_times, pm = get_epoch(et, inter_pulse)
+    pm_times, pm = get_epochs(et, inter_pulse)
     f0_times, f0, corr = get_f0_and_corr(et, frame_period)
 end
 
@@ -70,7 +70,7 @@ let
 
     inter_pulse = 0.01
     frame_period = 0.005
-    get_epoch(et, inter_pulse)
+    get_epochs(et, inter_pulse)
 
     @test_throws Exception get_f0_and_corr(et, frame_period)
 end
@@ -88,7 +88,7 @@ let
     frame_period = 0.005
 
     # First
-    pm_times, pm = get_epoch(et, inter_pulse)
+    pm_times, pm = get_epochs(et, inter_pulse)
     f0_times, f0, corr = get_f0_and_corr(et, frame_period)
 
     pm_times_copy = copy(pm_times)
@@ -104,7 +104,7 @@ let
     ok = track_epochs(et)
 
     # Second
-    pm_times, pm = get_epoch(et, inter_pulse)
+    pm_times, pm = get_epochs(et, inter_pulse)
     f0_times, f0, corr = get_f0_and_corr(et, frame_period)
 
     # Expect same results

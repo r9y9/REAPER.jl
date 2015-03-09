@@ -9,7 +9,7 @@ export
     init,
     compute_features,
     track_epochs,
-    get_epoch,
+    get_epochs,
     get_f0_and_corr
 
 
@@ -87,15 +87,15 @@ function track_epochs(et::EpochTracker)
     ccall((:TrackEpochs, libreaper), Bool, (Ptr{Void},), et.ptr)
 end
 
-function get_epoch_track(et::EpochTracker, inter_pulse::Float64)
+function get_epochs_track(et::EpochTracker, inter_pulse::Float64)
     pm_track = Track()
     ccall((:GetEpochTrack, libreaper), Bool,
           (Ptr{Void}, Float32, Ptr{Void}), et.ptr, inter_pulse, pm_track.ptr)
     pm_track
 end
 
-function get_epoch(et::EpochTracker, inter_pulse::Float64)
-    pm_track = get_epoch_track(et, inter_pulse)
+function get_epochs(et::EpochTracker, inter_pulse::Float64)
+    pm_track = get_epochs_track(et, inter_pulse)
     n = nframes(pm_track)
 
     pm_times = get_track_times(pm_track)
@@ -143,7 +143,7 @@ function reaper(x::Vector{Int16}, fs;
     ok = track_epochs(et)
     !ok && error("EpochTracker track_epochs failed")
 
-    pm_times, pm = get_epoch(et, inter_pulse)
+    pm_times, pm = get_epochs(et, inter_pulse)
     f0_times, f0, corr = get_f0_and_corr(et, frame_period)
 
     pm_times, pm, f0_times, f0, corr
