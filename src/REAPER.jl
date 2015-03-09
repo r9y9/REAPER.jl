@@ -37,24 +37,21 @@ function nframes(t::Track)
 end
 
 function get_track_times(track::Track)
-    n = nframes(track)
-    times = Array(Float32, n)
+    times = Array(Float32, nframes(track))
     ccall((:GetTrackTimes, libreaper), Void,
           (Ptr{Void}, Ptr{Float32}), track.ptr, times)
     times
 end
 
 function get_track_voiced_flags(track::Track)
-    n = nframes(track)
-    flags = Array(Int32, n)
+    flags = Array(Int32, nframes(track))
     ccall((:GetTrackTimes, libreaper), Void,
           (Ptr{Void}, Ptr{Int32}), track.ptr, flags)
     flags
 end
 
 function get_track_values(track::Track)
-    n = nframes(track)
-    values = Array(Float32, n)
+    values = Array(Float32, nframes(track))
     ccall((:GetTrackValues, libreaper), Void,
           (Ptr{Void}, Ptr{Float32}), track.ptr, values)
     values
@@ -102,9 +99,10 @@ function get_f0_and_corr_track(et::EpochTracker, frame_period::Float64)
     f0_track = Track()
     corr_track = Track()
 
-    ccall((:GetF0AndCorrTrack, libreaper), Bool,
-          (Ptr{Void}, Float32, Ptr{Void}, Ptr{Void}),
-          et.ptr, frame_period, f0_track.ptr, corr_track.ptr)
+    ok = ccall((:GetF0AndCorrTrack, libreaper), Bool,
+               (Ptr{Void}, Float32, Ptr{Void}, Ptr{Void}),
+               et.ptr, frame_period, f0_track.ptr, corr_track.ptr)
+    !ok && error("EpochTracker GetF0AndCorrTrack faild")
 
     f0_track, corr_track
 end
@@ -118,7 +116,6 @@ function get_f0_and_corr(et::EpochTracker, frame_period::Float64)
     times, f0, corr
 end
 
-# TODO separate `reaper` to small functions. This is just a demo code.
 function reaper(x::Vector{Int16}, fs;
                 minf0::Float64=40.0,
                 maxf0::Float64=500.0,
@@ -128,14 +125,14 @@ function reaper(x::Vector{Int16}, fs;
                 frame_period::Float64=0.005)
     et = EpochTracker()
 
-    success = init(et, x, fs, minf0, maxf0, do_high_pass, do_hilbert_transform)
-    !success && error("EpochTracker init failed")
+    ok = init(et, x, fs, minf0, maxf0, do_high_pass, do_hilbert_transform)
+    !ok && error("EpochTracker init failed")
 
-    success = compute_features(et)
-    !success && error("EpochTracker compute_features failed")
+    ok = compute_features(et)
+    !ok && error("EpochTracker compute_features failed")
 
-    success = track_epochs(et)
-    !success && error("EpochTracker track_epochs failed")
+    ok = track_epochs(et)
+    !ok && error("EpochTracker track_epochs failed")
 
     pm_times, pm = get_epoch(et, inter_pulse)
     f0_times, f0, corr = get_f0_and_corr(et, frame_period)
