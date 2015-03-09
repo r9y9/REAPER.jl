@@ -2,9 +2,32 @@
 
 [![Build Status](https://travis-ci.org/r9y9/REAPER.jl.svg?branch=master)](https://travis-ci.org/r9y9/REAPER.jl)
 
-Playing with [REAPER](https://github.com/google/REAPER) in Julia.
+A Julia interface for [REAPER](https://github.com/google/REAPER).
 
-[REAPER demo | nbviewer](http://nbviewer.ipython.org/github/r9y9/REAPER.jl/blob/master/examples/REAPER%20demo.ipynb)
+## High level interface
+
+```julia
+# Compute pitch mark, F0 and normalized cross-correlation function simultaneously
+pm_times, pm, f0_times, f0, corr = reaper(x, fs)
+```
+
+where `fs` is sampling frequency and `x::Vector{Int32}` is a input monoral speech signal like:
+
+![](examples/x.png)
+
+### Pitch mark
+
+![](examples/pitchmark.png)
+
+### F0
+
+![](examples/f0.png)
+
+### Normalized cross-correlation function
+
+![](examples/correlation.png)
+
+For the complete code of visualizations shown above, please check [the ijulia notebook](http://nbviewer.ipython.org/github/r9y9/REAPER.jl/blob/master/examples/REAPER%20demo.ipynb).
 
 ## Notice
 
