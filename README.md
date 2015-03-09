@@ -12,7 +12,7 @@ A Julia interface for [REAPER](https://github.com/google/REAPER).
 pm_times, pm, f0_times, f0, corr = reaper(x, fs)
 ```
 
-where `fs` is sampling frequency and `x::Vector{Int32}` is a input monoral speech signal like:
+where `fs` is sampling frequency and `x::Vector{Int16}` is a input monoral speech signal like:
 
 ![](examples/x.png)
 
