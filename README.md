@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/r9y9/REAPER.jl.svg?branch=master)](https://travis-ci.org/r9y9/REAPER.jl)
 [![Coverage Status](https://coveralls.io/repos/r9y9/REAPER.jl/badge.svg)](https://coveralls.io/r/r9y9/REAPER.jl)
+[![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
 
 A Julia interface for [REAPER](https://github.com/google/REAPER).
 
