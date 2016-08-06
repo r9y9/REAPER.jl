@@ -3,7 +3,7 @@ using Base.Test
 
 import REAPER: Track, nframes
 
-x = int16(vec(readdlm(joinpath(dirname(@__FILE__), "test16k.txt"))))
+x = map(Int16, vec(readdlm(joinpath(dirname(@__FILE__), "test16k.txt"))))
 const fs = 16000
 @assert length(x) == 60700
 @assert isa(x, Vector{Int16})

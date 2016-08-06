@@ -1,3 +1,4 @@
+__precompile__(true)
 module REAPER
 
 export
@@ -13,10 +14,10 @@ export
     get_f0_and_corr
 
 
-const libreaper = joinpath(Pkg.dir("REAPER"), "deps", "REAPER", "build", "libreaper")
+const libreaper = joinpath(dirname(@__FILE__), "..", "deps", "REAPER", "build", "libreaper")
 
 try
-    dlopen(libreaper)
+    Libdl.dlopen(libreaper)
 catch e
     rethrow(e)
 end

@@ -1,21 +1,23 @@
 # build REAPER as a shared library
 
-if !isdir(joinpath(dirname(@__FILE__), "REAPER", "build"))
-    cd(Pkg.dir("REAPER"))
+depsdir = joinpath(dirname(@__FILE__))
+
+if !isdir(joinpath(depsdir, "REAPER", "build"))
+    cd(depsdir)
     run(`git submodule update --init --recursive`)
 end
 
-build_dir = joinpath(Pkg.dir("REAPER"), "deps", "REAPER", "build")
-!isdir(build_dir) && mkdir(build_dir)
+builddir = joinpath(depsdir, "REAPER", "build")
+!isdir(builddir) && mkdir(builddir)
 
-cd(build_dir)
+cd(builddir)
 
 run(`cmake ..`)
 run(`make reaper_wrap`)
 
 # After runing make, REAPER/build/libreaper.so/dylib will be created
 try
-    dlopen(joinpath(build_dir, "libreaper"))
+    Libdl.dlopen(joinpath(builddir, "libreaper"))
 catch e
     rethrow(e)
 end
